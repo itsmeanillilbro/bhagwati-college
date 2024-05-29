@@ -10,12 +10,12 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/navbars/navbar-1/assets/css/navbar-1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="{{url('frontend/lib/slick/slick.css')}}" rel="stylesheet">
     <link href="{{url('frontend/lib/slick/slick-theme.css')}}" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
 
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
@@ -83,8 +83,21 @@
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="{{route("about")}}">About</a>
                         </li>
+
+                        @foreach ($menu as $men)
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#!" id="accountDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">{{$men->title}}</a>
+                                <ul class="dropdown-menu border-0 shadow bsb-zoomIn" aria-labelledby="accountDropdown">
+                                    @foreach ($submenu as $submen)
+                                        <li><a class="dropdown-item" href="#!">{{$submen->title1}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
+
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="#!">Programs</a>
+                            <a class="nav-link " aria-current="page" href="{{route("ssr")}}">SSR</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="{{route("news")}}">News</a>
@@ -96,16 +109,7 @@
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="{{route("gallery")}}">Gallery</a>
                         </li>
-                        <!-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#!" id="accountDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">Admission</a>
-                            <ul class="dropdown-menu border-0 shadow bsb-zoomIn" aria-labelledby="accountDropdown">
-                                <li><a class="dropdown-item" href="#!">+2</a></li>
-                                <li><a class="dropdown-item" href="#!">CMAT</a></li>
-                                <li><a class="dropdown-item" href="#!">BBA/BBM/BBS</a></li>
-                                <li><a class="dropdown-item" href="#!">Masters</a></li>
-                            </ul>
-                        </li> -->
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{route("notice")}}">Notice</a>
                         </li>

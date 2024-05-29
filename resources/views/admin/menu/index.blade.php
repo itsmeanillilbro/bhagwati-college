@@ -24,7 +24,7 @@
                                             <th>Author</th>
                                             <th>Title</th>
                                             <th>Status</th>
-                                            <th>Link</th>
+                                            <!-- <th>Link</th> -->
                                             <th>Date</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
@@ -38,7 +38,7 @@
                                         <td>{{$ban->author}}</td>
                                         <td>{{$ban->title}}</td>
                                         <td>{{$ban->status}}</td>
-                                        <td>{{$ban->link}}</td>
+                                        <!-- <td>{{$ban->link}}</td> -->
                                         <td>{{date('Y-m-d', strtotime($ban->created_at))}}</td>
                                         <td><a class="btn btn-primary" href="{{route('menu.edit', $ban->id)}}" >Edit</a></td>
                                         <td>

@@ -34,7 +34,7 @@
 
                             <div class="form-group">
                                 <label for="banner_img">Menu Link</label>
-
+                                <font color="brown" >(Only applicable when there are no Sub-Menus)</font>
                                 <input type="text" name="link" class="form-control" value="{{$menu->link}}" ">
                             </div>
                             <button type="submit" name="update_banner" class="btn btn-primary" value="Update banner">Update Banner</button>

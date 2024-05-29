@@ -18,7 +18,8 @@
 
                     <div class="form-group">
                         <label for="banner_image">Menu Link </label>
-                        <input type="text" name="link"  class="form-control"  required>
+                        <font color="brown" >(Only applicable when there are no Sub-Menus)</font>
+                        <input type="text" name="link"  class="form-control">
                     </div>
 
 

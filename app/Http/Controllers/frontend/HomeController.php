@@ -13,15 +13,18 @@ use App\Models\Menu;
 use App\Models\News;
 use App\Models\Notice;
 use App\Models\Popup;
+use App\Models\SSR;
 use App\Models\Submenu;
-use App\Models\subsubmenu;
+
 use App\Models\Teams;
 use App\Models\Testimonial;
 use App\Models\Timeline;
 use App\Models\Topbanner;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use Zerkxubas\EsewaLaravel\Facades\Esewa;
 class HomeController extends Controller
 {
 
@@ -32,8 +35,8 @@ class HomeController extends Controller
 
         $topbanner = Topbanner::where('status', 'published')->orderByDesc('created_at')->take(1)->get();
         $menu = Menu::where('status', 'published')->orderByDesc('created_at')->get();
-         $submenu = Submenu::where('status', 'published')->orderByDesc('created_at')->get();
-         $subsubmenu = subsubmenu::where('status', 'published')->orderByDesc('created_at')->get();
+        $submenu = Submenu::where('status', 'published')->orderByDesc('created_at')->get();
+
         $banner = Banner::where('status', 'published')->orderByDesc('created_at')->take(3)->get();
         $popup = Popup::where('status', 'published')->orderByDesc('created_at')->take(2)->get();
         $timeline = Timeline::where('status', 'published')->orderByDesc('created_at')->get();
@@ -41,8 +44,20 @@ class HomeController extends Controller
         $academics = Academic::where('status', 'published')->orderByDesc('created_at')->take(6)->get();
         $notices = Notice::where('status', 'published')->orderByDesc('created_at')->take(6)->get();
         $news = News::where('status', 'published')->orderByDesc('created_at')->take(6)->get();
-        return view('frontend.index', compact('news', 'notices', 'academics', 'testimonial', 'timeline', 'popup', 'banner','menu',
-        'submenu','subsubmenu','topbanner','gallery'));
+        return view('frontend.index', compact(
+            'news',
+            'notices',
+            'academics',
+            'testimonial',
+            'timeline',
+            'popup',
+            'banner',
+            'menu',
+            'submenu',
+            'topbanner',
+            'gallery'
+        )
+        );
 
     }
 
@@ -84,15 +99,15 @@ class HomeController extends Controller
 
     public function gallery()
     {
-        $gallery  = Gallery::where('status', 'published')->orderByDesc('created_at')->get();
-        return view('frontend.gallery',compact('gallery'));
+        $gallery = Gallery::where('status', 'published')->orderByDesc('created_at')->get();
+        return view('frontend.gallery', compact('gallery'));
     }
-  public function showImages($gallery_id)
-{
-    $gallery = Gallery::findOrFail($gallery_id);
-    $images = $gallery->images()->get();
-    return view('frontend.images', compact('gallery', 'images'));
-}
+    public function showImages($gallery_id)
+    {
+        $gallery = Gallery::findOrFail($gallery_id);
+        $images = $gallery->images()->get();
+        return view('frontend.images', compact('gallery', 'images'));
+    }
     public function privacy()
     {
         return view('frontend.privacy');
@@ -102,9 +117,10 @@ class HomeController extends Controller
         return view('frontend.academicdetails');
     }
 
-    public function showAcademics($id){
+    public function showAcademics($id)
+    {
         $academics = Academic::findOrFail($id);
-        return view('frontend.academicdetails',compact('academics'));
+        return view('frontend.academicdetails', compact('academics'));
     }
 
     public function images()
@@ -114,7 +130,7 @@ class HomeController extends Controller
     public function teams()
     {
         $teams = Teams::where('status', 'published')->orderByDesc('created_at')->get();
-        return view('frontend.teams',compact('teams'));
+        return view('frontend.teams', compact('teams'));
     }
     public function terms()
     {
@@ -135,24 +151,10 @@ class HomeController extends Controller
         return view('frontend.about', compact('entries'));
     }
 
-    // public function menuBody($id){
-    //     $subsubmenu = subsubmenu::all();
-    //     $menubody = subsubmenu::findOrFail($id);
-    //     return view('frontend.menubody',compact('menubody','subsubmenu'));
-    // }
 
-    public function menuBody($id)
+
+    public function submenubody($id)
     {
-        $menubody = Subsubmenu::findOrFail($id);
-        if (filter_var($menubody->link, FILTER_VALIDATE_URL)) {
-            return redirect()->away($menubody->link);
-        } else {
-
-            return view('frontend.menubody', compact('menubody'));
-        }
-    }
-
-    public function submenubody($id){
 
         $menubody = Submenu::findOrFail($id);
         if (filter_var($menubody->link, FILTER_VALIDATE_URL)) {
@@ -170,6 +172,32 @@ class HomeController extends Controller
         return view('frontend.news', compact('news'));
     }
 
+
+    public function SSR()
+    {
+        $ssr = SSR::where('status', 'published')->orderBy('created_at', 'desc')->get();
+        return view('frontend.ssrauth', compact('ssr'));
+    }
+
+    public function verify(Request $request)
+    {
+        $ssr = SSR::where('status', 'published')->orderBy('created_at', 'desc')->get();
+        $correctPassword = 'yoo';
+
+
+        if ($request->password === $correctPassword) {
+
+            return view('frontend.ssr', compact('ssr'));
+
+        } else {
+
+            if ($request->password !== $correctPassword) {
+              Toastr::error('Wrong Password!');
+            }
+            return view('frontend.ssrauth');
+          }
+    }
+
     public function newsdetails($id)
     {
 
@@ -178,14 +206,13 @@ class HomeController extends Controller
         return view('frontend.newsdetails', compact('news'));
     }
 
-
     private function getCommonData()
     {
         return [
             'topbanner' => Topbanner::where('status', 'published')->orderByDesc('created_at')->take(1)->get(),
             'menu' => Menu::where('status', 'published')->orderByDesc('created_at')->get(),
             'submenu' => Submenu::where('status', 'published')->orderByDesc('created_at')->get(),
-            'subsubmenu' => subsubmenu::where('status', 'published')->orderByDesc('created_at')->get(),
+
 
         ];
     }

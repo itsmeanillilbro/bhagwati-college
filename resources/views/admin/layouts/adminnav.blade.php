@@ -81,19 +81,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;" class="dropdown-toggle" data-toggle="collapse" data-target="#subsubmenu"><i
-                        class="fa-brands fa-mendeley"></i> SubMenu of Sub Menu <i
-                        class="fa-solid fa-chevron-down"></i></a>
-                <ul id="subsubmenu" class="collapse">
-                    <li>
-                        <a href="{{route('subsubmenu.index')}}">View All</a>
-                    </li>
-                    <li>
-                        <a href="{{route('subsubmenu.create')}}">Add New</a>
-                    </li>
-                </ul>
-            </li>
+
             <li>
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="collapse" data-target="#banner"><i
                         class="fa-solid fa-panorama"></i> Banner <i class="fa-solid fa-chevron-down"></i></a>
