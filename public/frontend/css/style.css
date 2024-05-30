@@ -149,7 +149,7 @@ button.btn:hover {
 /**********************************/
 /*********** Top Bar CSS **********/
 /**********************************/
-@media all and (min-width: 992px) {
+/* @media all and (min-width: 992px) {
     .navbar .dropdown-menu-end {
       right: 0;
       left: auto;
@@ -179,7 +179,7 @@ button.btn:hover {
       top: 100%;
       transform: rotateX(0deg);
     }
-  }
+  } */
 
 
 /**********************************/

@@ -11,24 +11,6 @@
     });
 
 
-    // Dropdown on mouse hover
-    $(document).ready(function () {
-        function toggleNavbarMethod() {
-            if ($(window).width() > 768) {
-                $('.navbar .dropdown').on('mouseenter', function () {
-                    $(this).addClass('show').find('.dropdown-menu').addClass('show');
-                }).on('mouseleave', function () {
-                    $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
-                });
-            } else {
-                $('.navbar .dropdown').off('mouseenter').off('mouseleave');
-            }
-        }
-        toggleNavbarMethod();
-        $(window).resize(toggleNavbarMethod);
-    });
-
-
 
     // Back to top button
     $(window).scroll(function () {

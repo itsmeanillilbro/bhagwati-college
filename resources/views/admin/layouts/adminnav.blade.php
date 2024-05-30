@@ -43,7 +43,18 @@
             </li>
 
             <li>
-
+            <li>
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="collapse" data-target="#topbanner"><i
+                        class="fa-solid fa-ribbon"></i> Top Banner <i class="fa-solid fa-chevron-down"></i></a>
+                <ul id="topbanner" class="collapse">
+                    <li>
+                        <a href="{{route('topbanner.index')}}">View All</a>
+                    </li>
+                    <li>
+                        <a href="{{route('topbanner.create')}}">Add New</a>
+                    </li>
+                </ul>
+            </li>
             <li>
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="collapse" data-target="#popup"><i
                         class="fa-solid fa-fire-flame-curved"></i> Popup Item <i
@@ -81,7 +92,19 @@
                     </li>
                 </ul>
             </li>
-
+            <li>
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="collapse" data-target="#subsubmenu"><i
+                        class="fa-brands fa-mendeley"></i> SubMenu of Sub Menu <i
+                        class="fa-solid fa-chevron-down"></i></a>
+                <ul id="subsubmenu" class="collapse">
+                    <li>
+                        <a href="{{route('subsubmenu.index')}}">View All</a>
+                    </li>
+                    <li>
+                        <a href="{{route('subsubmenu.create')}}">Add New</a>
+                    </li>
+                </ul>
+            </li>
             <li>
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="collapse" data-target="#banner"><i
                         class="fa-solid fa-panorama"></i> Banner <i class="fa-solid fa-chevron-down"></i></a>
@@ -119,6 +142,18 @@
                 </ul>
             </li>
             <li>
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="collapse" data-target="#timeline"><i
+                        class="fa-solid fa-timeline"></i> Timeline <i class="fa-solid fa-chevron-down"></i></a>
+                <ul id="timeline" class="collapse">
+                    <li>
+                        <a href="{{route('timeline.index')}}">View All</a>
+                    </li>
+                    <li>
+                        <a href="{{route('timeline.create')}}">Add New</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="collapse" data-target="#academic"><i
                         class="fa-solid fa-graduation-cap"></i> Academic <i class="fa-solid fa-chevron-down"></i></a>
                 <ul id="academic" class="collapse">
@@ -126,7 +161,7 @@
                         <a href="{{route('academic.index')}}">View All</a>
                     </li>
                     <li>
-                        <a href="{{route('academic.create')}}">Add New</a>
+                        <a href="{{route('academic.create')}}}}">Add New</a>
                     </li>
                 </ul>
             </li>

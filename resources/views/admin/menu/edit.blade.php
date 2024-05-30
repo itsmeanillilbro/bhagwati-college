@@ -37,6 +37,21 @@
                                 <font color="brown" >(Only applicable when there are no Sub-Menus)</font>
                                 <input type="text" name="link" class="form-control" value="{{$menu->link}}" ">
                             </div>
+
+
+                            <div class="form-group">
+                    <label for="password">Password Protection?</label>
+                    <select id="password" name="password" class="form-control" required>
+                        <option value="no" {{ $menu->password === 'no' ? 'selected' : '' }}>No</option>
+                        <option value="yes" {{ $menu->password === 'yes' ? 'selected' : '' }}>Yes</option>
+                    </select>
+                </div>
+
+                            <div class=" form-group">
+                            <label for="submenu_para">Menu Content</label>
+                            <textarea class="form-control" name="description" id="" cols="30"
+                                rows="15">{{old('description', $menu->description)}}</textarea>
+                        </div>
                             <button type="submit" name="update_banner" class="btn btn-primary" value="Update banner">Update Banner</button>
                         </form>
                     </div>

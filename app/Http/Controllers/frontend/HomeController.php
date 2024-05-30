@@ -16,6 +16,7 @@ use App\Models\Popup;
 use App\Models\SSR;
 use App\Models\Submenu;
 
+use App\Models\subsubmenu;
 use App\Models\Teams;
 use App\Models\Testimonial;
 use App\Models\Timeline;
@@ -36,7 +37,7 @@ class HomeController extends Controller
         $topbanner = Topbanner::where('status', 'published')->orderByDesc('created_at')->take(1)->get();
         $menu = Menu::where('status', 'published')->orderByDesc('created_at')->get();
         $submenu = Submenu::where('status', 'published')->orderByDesc('created_at')->get();
-
+        $subsubmenu = subsubmenu::where('status', 'published')->orderByDesc('created_at')->get();
         $banner = Banner::where('status', 'published')->orderByDesc('created_at')->take(3)->get();
         $popup = Popup::where('status', 'published')->orderByDesc('created_at')->take(2)->get();
         $timeline = Timeline::where('status', 'published')->orderByDesc('created_at')->get();
@@ -54,6 +55,7 @@ class HomeController extends Controller
             'banner',
             'menu',
             'submenu',
+            'subsubmenu',
             'topbanner',
             'gallery'
         )
@@ -151,17 +153,27 @@ class HomeController extends Controller
         return view('frontend.about', compact('entries'));
     }
 
-
-
-    public function submenubody($id)
+    public function menubody($id)
     {
 
-        $menubody = Submenu::findOrFail($id);
+        $menubody = Menu::findOrFail($id);
         if (filter_var($menubody->link, FILTER_VALIDATE_URL)) {
             return redirect()->away($menubody->link);
         } else {
 
-            return view('frontend.submenubody', compact('menubody'));
+            return view('frontend.menubody', compact('menubody'));
+        }
+    }
+
+    public function submenubody($id)
+    {
+
+        $submenubody = Submenu::findOrFail($id);
+        if (filter_var($submenubody->link, FILTER_VALIDATE_URL)) {
+            return redirect()->away($submenubody->link);
+        } else {
+
+            return view('frontend.submenubody', compact('submenubody'));
         }
     }
 
@@ -213,7 +225,7 @@ class HomeController extends Controller
             'menu' => Menu::where('status', 'published')->orderByDesc('created_at')->get(),
             'submenu' => Submenu::where('status', 'published')->orderByDesc('created_at')->get(),
 
-
+            'subsubmenu' => subsubmenu::where('status', 'published')->orderByDesc('created_at')->get(),
         ];
     }
 

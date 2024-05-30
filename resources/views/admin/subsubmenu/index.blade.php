@@ -10,9 +10,9 @@
             <div class="col-lg-12">
                 <h1 class="page-header">
                     <div class="col-xs-4">
-                        <a href="{{route('submenu.create')}}" class="btn btn-primary">Add New</a>
+                        <a href="{{route('subsubmenu.create')}}" class="btn btn-primary">Add New</a>
                     </div>
-                    All Submenu
+                    All Sub-Submenu
                 </h1>
                 <div class="row">
                     <div class="col-lg-12">
@@ -22,10 +22,10 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Author</th>
-                                            <th>Menu</th>
-                                            <th>Submenu</th>
+                                            <th>SubMenu</th>
+                                            <th>Subsubmenu</th>
                                             <th>Status</th>
-
+                                            <!-- <th>URL</th> -->
                                             <th>Date</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
@@ -34,17 +34,17 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                    @foreach($submenu as $ban)
+                                    @foreach($subsubmenu as $ban)
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$ban->author}}</td>
-                                        <td>{{$ban->menu->title}}</td>
-                                        <td>{{$ban->title1}}</td>
+                                        <td>{{$ban->submenu->title1}}</td>
+                                        <td>{{$ban->subsubmenutitle}}</td>
                                         <td>{{$ban->status}}</td>
-
+                                        <!-- <td>{{$ban->link}}</td> -->
                                         <td>{{date('Y-m-d', strtotime($ban->created_at))}}</td>
-                                        <td><a class="btn btn-primary" href="{{route('submenu.edit', $ban->id)}}" >Edit</a></td>
+                                        <td><a class="btn btn-primary" href="{{route('subsubmenu.edit', $ban->id)}}" >Edit</a></td>
                                         <td>
-                                            <form action="{{route('submenu.destroy', $ban->id)}}"  method="POST" >
+                                            <form action="{{route('subsubmenu.destroy', $ban->id)}}"  method="POST" >
                                          @csrf
                                         @method('DELETE')
 
@@ -52,7 +52,7 @@
                                          </form>
                                         </td>
                                         <td>
-    <form action="{{ route('submenu.publish', $ban->id) }}" method="post">
+    <form action="{{ route('subsubmenu.publish', $ban->id) }}" method="post">
         @csrf
         <button type="submit" class="btn btn-success confirm-publish"  data-id="{{$ban->id}}" >Publish</a>
     </form>
@@ -63,7 +63,7 @@
                     </tbody>
                                         </table>
                                         <div class="pagination">
-                                        {{$submenu->links()}}
+                                        {{$subsubmenu->links()}}
                                     </div>
                                 </div>
                             </div>

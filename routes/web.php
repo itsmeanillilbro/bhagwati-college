@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\NoticeController;
 use App\Http\Controllers\admin\SSRController;
 use App\Http\Controllers\admin\SubmenuController;
 
+use App\Http\Controllers\admin\SubsubmenuController;
 use App\Http\Controllers\admin\TeamsController;
 use App\Http\Controllers\admin\TimelineController;
 use App\Http\Controllers\admin\TopbannerController;
@@ -174,7 +175,14 @@ Route::prefix('admin')->group(function(){
     Route::post('/admin/submenu/publish/{id}', [SubmenuController::class, 'publish'])->name('submenu.publish');
 });
 
+Route::prefix('admin')->group(function(){
+    Route::resource('subsubmenu',SubsubmenuController::class)->only([
+        'index', 'create', 'store', 'edit', 'update', 'destroy'
+    ]);
+    Route::post('/admin/subsubmenu/publish/{id}', [SubsubmenuController::class, 'publish'])->name('subsubmenu.publish');
+    Route::get('/subsubmenu/{id}', [SubsubmenuController::class,'subsubmenuDescription'])->name('subsubmenu.description');
 
+});
 
 Route::prefix('admin')->group(function(){
     Route::resource('downloads',DownloadsController::class)->only([
@@ -200,7 +208,7 @@ Route::prefix('admin')->group(function(){
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/submenu/{id}', [HomeController::class, 'submenubody'])->name('submenu.body');
-
+Route::get('/menu/{id}', [HomeController::class, 'menubody'])->name('menu.body');
 Route::get('/download', [HomeController::class, 'download'])->name('download');
 Route::get('/file_download/{filename}', function ($filename) {
     $path = storage_path('app/public/images/file/' . $filename);

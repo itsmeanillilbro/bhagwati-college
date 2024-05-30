@@ -53,6 +53,7 @@ private function loadCommonData()
         $view->with('topbanner', Topbanner::where('status', 'published')->orderByDesc('created_at')->take(1)->get());
         $view->with('menu', Menu::where('status', 'published')->orderByDesc('created_at')->paginate(10));
         $view->with('submenu', Submenu::where('status', 'published')->orderByDesc('created_at')->paginate(10));
+        $view->with('subsubmenu', subsubmenu::where('status', 'published')->orderByDesc('created_at')->paginate(10));
 
     });
 }

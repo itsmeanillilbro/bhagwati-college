@@ -28,12 +28,12 @@
                 <div class="form-group">
                     <label for="submenu_url">Submenu URL</label>
                     <input type="text" name="link" placeholder="Enter submenu url" value="" class="form-control"
-                        required>
+                        >
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password Protection?</label>
-                    <select id="password" name="password" class="form-control" required>
+                    <select id="password" name="password" class="form-control">
                         <option value="no">No</option>
                         <option value="yes">Yes</option>
                     </select>

@@ -9,14 +9,15 @@ class Menu extends Model
 {
     use HasFactory;
 
-    public $table= 'menu';
-    public $fillable=[
+    public $table = 'menu';
+    public $fillable = [
         'id',
         'title',
         'link',
         'status',
         'author',
-
+        'password',
+        'description'
     ];
 
     public function submenus()
