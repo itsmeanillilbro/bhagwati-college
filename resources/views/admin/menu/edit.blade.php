@@ -52,7 +52,7 @@
                             <textarea class="form-control" name="description" id="" cols="30"
                                 rows="15">{{old('description', $menu->description)}}</textarea>
                         </div>
-                            <button type="submit" name="update_banner" class="btn btn-primary" value="Update banner">Update Banner</button>
+                            <button type="submit" name="update_banner" class="btn btn-primary" value="Update banner">Update</button>
                         </form>
                     </div>
                 </div>

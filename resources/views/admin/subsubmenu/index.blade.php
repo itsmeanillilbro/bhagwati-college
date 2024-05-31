@@ -24,12 +24,12 @@
                                             <th>Author</th>
                                             <th>SubMenu</th>
                                             <th>Subsubmenu</th>
-                                            <th>Status</th>
+                                            <!-- <th>Status</th> -->
                                             <!-- <th>URL</th> -->
                                             <th>Date</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
-                                            <th>Publish</th>
+                                            <!-- <th>Publish</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -39,7 +39,7 @@
                                         <td>{{$ban->author}}</td>
                                         <td>{{$ban->submenu->title1}}</td>
                                         <td>{{$ban->subsubmenutitle}}</td>
-                                        <td>{{$ban->status}}</td>
+                                        <!-- <td>{{$ban->status}}</td> -->
                                         <!-- <td>{{$ban->link}}</td> -->
                                         <td>{{date('Y-m-d', strtotime($ban->created_at))}}</td>
                                         <td><a class="btn btn-primary" href="{{route('subsubmenu.edit', $ban->id)}}" >Edit</a></td>
@@ -51,12 +51,12 @@
                                          <button class="btn btn-danger  confirm-delete" >Delete</button>
                                          </form>
                                         </td>
-                                        <td>
+                                        <!-- <td>
     <form action="{{ route('subsubmenu.publish', $ban->id) }}" method="post">
         @csrf
         <button type="submit" class="btn btn-success confirm-publish"  data-id="{{$ban->id}}" >Publish</a>
     </form>
-</td>
+</td> -->
                                     </tr>
                     @endforeach
 

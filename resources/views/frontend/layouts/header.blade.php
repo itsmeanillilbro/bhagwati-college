@@ -63,7 +63,8 @@
         <div class="navbar">
             <i class='bx bx-menu'></i>
             <div class="logo"> <a href="{{route('index')}}">
-                    <img src="{{url("frontend/img/logo.png")}}" height="70px" width="80px">
+                    <img src="{{url("frontend/img/translogo1.png")}}" height="70px" width="80px"
+                        style="background-color:	#F5F5F5;">
                 </a></div>
             <div class="nav-links">
                 <div class="sidebar-logo">
@@ -72,41 +73,49 @@
                     </a>
                     <i class='bx bx-x'></i>
                 </div>
-                <ul class="links">
+                <ul class="links ">
                     <li> <a href="{{route("index")}}">Home</a></li>
 
-
-
-
                     @foreach($menu as $men)
-    <li>
-        <a href="#">{{ $men->title }}</a>
-        @if(isset($men->submenus) && count($men->submenus) > 0)
-            <i class='bx bxs-chevron-down htmlcss-arrow arrow'></i>
-            <ul class="htmlCss-sub-menu sub-menu">
-                @foreach($men->submenus as $submen)
-                    <li class="{{ isset($submen->subsubmenus) && count($submen->subsubmenus) > 0 ? 'more' : '' }}">
-
-                            <a href="{{ route('submenu.body', $submen->id) }}">{{ $submen->title1 }}</a>
-                            @if(isset($submen->subsubmenus) && count($submen->subsubmenus) > 0)
-                                <i class='bx bxs-chevron-right arrow more-arrow'></i>
-                            @endif
-
-                        @if(isset($submen->subsubmenus) && count($submen->subsubmenus) > 0)
-                            <ul class="more-sub-menu sub-menu">
-                                @foreach($submen->subsubmenus as $subsubmen)
-                                    <li>
-                                        <a href="{{ route('menu.body', $subsubmen->id) }}">{{ $subsubmen->subsubmenutitle }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                        @if($men->status === 'published')
+                            <li>
+                                @if(isset($men->submenus) && count($men->submenus) > 0)
+                                    <a href="#">{{ $men->title }}</a>
+                                    <i class='bx bxs-chevron-down htmlcss-arrow arrow submenu-toggle'></i>
+                                @else
+                                    <a href="{{ route('menu.body', $men->id) }}">{{ $men->title }}</a>
+                                @endif
+                                @if(isset($men->submenus) && count($men->submenus) > 0)
+                                    <ul class="htmlCss-sub-menu sub-menu submenu-toggle">
+                                        @foreach($men->submenus as $submen)
+                                            <li
+                                                class="{{ isset($submen->subsubmenus) && count($submen->subsubmenus) > 0 ? 'more' : '' }}">
+                                                @if(!isset($submen->subsubmenus) || count($submen->subsubmenus) == 0 || $submen->status === 'published')
+                                                    <a href="{{ route('submenu.body', $submen->id) }}">{{ $submen->title1 }}</a>
+                                                @else
+                                                    <a href="#">{{ $submen->title1 }}</a>
+                                                    @if(isset($submen->subsubmenus) && count($submen->subsubmenus) > 0)
+                                                        <i class='bx bxs-chevron-right arrow more-arrow sub-submenu-toggle'></i>
+                                                    @endif
+                                                @endif
+                                                @if(isset($submen->subsubmenus) && count($submen->subsubmenus) > 0)
+                                                    <ul class="more-sub-menu sub-menu">
+                                                        @foreach($submen->subsubmenus as $subsubmen)
+                                                            <li>
+                                                                <a
+                                                                    href="{{ route('subsubmenu.body', $subsubmen->id) }}">{{ $subsubmen->subsubmenutitle }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </li>
                         @endif
-                    </li>
-                @endforeach
-            </ul>
-        @endif
-    </li>
-@endforeach
+                    @endforeach
+
 
 
 
@@ -130,7 +139,50 @@
 
 
 
-    <style>
+
+
+
+    <script>
+
+
+        // Sidebar open close js code
+        let navLinks = document.querySelector(".nav-links");
+        let menuOpenBtn = document.querySelector(".navbar .bx-menu");
+        let menuCloseBtn = document.querySelector(".nav-links .bx-x");
+        menuOpenBtn.onclick = function () {
+            navLinks.style.left = "0";
+        }
+        menuCloseBtn.onclick = function () {
+            navLinks.style.left = "-100%";
+        }
+
+        // Sidebar submenu open close js code
+        let htmlcssArrows = document.querySelectorAll(".htmlcss-arrow");
+        htmlcssArrows.forEach((arrow) => {
+            arrow.onclick = function (event) {
+                event.preventDefault(); // Prevent default anchor behavior
+                this.parentElement.parentElement.classList.toggle("show1");
+            }
+        });
+
+        let moreArrows = document.querySelectorAll(".more-arrow");
+        moreArrows.forEach((arrow) => {
+            arrow.onclick = function (event) {
+                event.preventDefault(); // Prevent default anchor behavior
+                this.parentElement.parentElement.classList.toggle("show2");
+            }
+        });
+
+
+        let jsArrow = document.querySelector(".js-arrow");
+jsArrow.onclick = function() {
+ navLinks.classList.toggle("show3");
+}
+
+    </script>
+
+
+<style>
         /* Googlefont Poppins CDN Link */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
@@ -488,53 +540,4 @@
                 max-width: 100%;
             }
         }
-
-
-
-
-
-
     </style>
-
-
-    <script>
-        // Search-box open close js code
-        let navbar = document.querySelector(".navbar");
-        let searchBox = document.querySelector(".search-box .bx-search");
-
-        searchBox.addEventListener("click", () => {
-            navbar.classList.toggle("showInput");
-            if (navbar.classList.contains("showInput")) {
-                searchBox.classList.replace("bx-search", "bx-x");
-            } else {
-                searchBox.classList.replace("bx-x", "bx-search");
-            }
-        });
-
-        // Sidebar open close js code
-        let navLinks = document.querySelector(".nav-links");
-        let menuOpenBtn = document.querySelector(".navbar .bx-menu");
-        let menuCloseBtn = document.querySelector(".nav-links .bx-x");
-        menuOpenBtn.onclick = function () {
-            navLinks.style.left = "0";
-        }
-        menuCloseBtn.onclick = function () {
-            navLinks.style.left = "-100%";
-        }
-
-        // Sidebar submenu open close js code
-        let htmlcssArrows = document.querySelectorAll(".htmlcss-arrow");
-        htmlcssArrows.forEach((arrow) => {
-            arrow.onclick = function () {
-                this.parentElement.parentElement.classList.toggle("show1");
-            }
-        });
-
-        let moreArrows = document.querySelectorAll(".more-arrow");
-        moreArrows.forEach((arrow) => {
-            arrow.onclick = function () {
-                this.parentElement.parentElement.classList.toggle("show2");
-            }
-        });
-
-    </script>

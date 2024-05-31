@@ -206,9 +206,9 @@ Route::prefix('admin')->group(function(){
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
-
+Route::get('/menu/{id}', [HomeController::class,'menubody' ])->name('menu.body');
 Route::get('/submenu/{id}', [HomeController::class, 'submenubody'])->name('submenu.body');
-Route::get('/menu/{id}', [HomeController::class, 'menubody'])->name('menu.body');
+Route::get('/subsubmenu/{id}', [HomeController::class, 'subsubmenubody'])->name('subsubmenu.body');
 Route::get('/download', [HomeController::class, 'download'])->name('download');
 Route::get('/file_download/{filename}', function ($filename) {
     $path = storage_path('app/public/images/file/' . $filename);
@@ -247,6 +247,9 @@ Route::get('/newsdetails/{id}', [HomeController::class, 'newsdetails'])->name('n
 // Route::get('/academicdetails', [HomeController::class, 'academicdetails'])->name('academicdetails');
 Route::get('/teams', [HomeController::class, 'teams'])->name('teams');
 Route::get('/ssr', [HomeController::class, 'SSR'])->name('ssr');
+Route::post('/verify', [HomeController::class, 'verify'])->name('verify');
+Route::get('/ssrpage', [HomeController::class, 'SSRPage'])->name('ssr.page');
+
 Route::get('/ssr_download/{filename}', function ($filename) {
     $path = storage_path('app/public/images/file/' . $filename);
     if (!Storage::exists('public/images/file/' . $filename)) {
@@ -257,7 +260,7 @@ Route::get('/ssr_download/{filename}', function ($filename) {
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
 Route::get('/images', [HomeController::class, 'images'])->name('images');
 
-Route::get('/verify', [HomeController::class, 'verify'])->name('verify');
-Route::post('/verify', [HomeController::class, 'verify'])->name('verify');
+// Route::get('/verify', [HomeController::class, 'verify'])->name('verify');
+
 
 require __DIR__.'/auth.php';

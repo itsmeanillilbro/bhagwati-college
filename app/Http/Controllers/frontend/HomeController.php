@@ -26,6 +26,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Zerkxubas\EsewaLaravel\Facades\Esewa;
+
 class HomeController extends Controller
 {
 
@@ -36,8 +37,8 @@ class HomeController extends Controller
 
         $topbanner = Topbanner::where('status', 'published')->orderByDesc('created_at')->take(1)->get();
         $menu = Menu::where('status', 'published')->orderByDesc('created_at')->get();
-        $submenu = Submenu::where('status', 'published')->orderByDesc('created_at')->get();
-        $subsubmenu = subsubmenu::where('status', 'published')->orderByDesc('created_at')->get();
+        $submenu = Submenu::orderByDesc('created_at')->get();
+        $subsubmenu = subsubmenu::orderByDesc('created_at')->get();
         $banner = Banner::where('status', 'published')->orderByDesc('created_at')->take(3)->get();
         $popup = Popup::where('status', 'published')->orderByDesc('created_at')->take(2)->get();
         $timeline = Timeline::where('status', 'published')->orderByDesc('created_at')->get();
@@ -45,20 +46,22 @@ class HomeController extends Controller
         $academics = Academic::where('status', 'published')->orderByDesc('created_at')->take(6)->get();
         $notices = Notice::where('status', 'published')->orderByDesc('created_at')->take(6)->get();
         $news = News::where('status', 'published')->orderByDesc('created_at')->take(6)->get();
-        return view('frontend.index', compact(
-            'news',
-            'notices',
-            'academics',
-            'testimonial',
-            'timeline',
-            'popup',
-            'banner',
-            'menu',
-            'submenu',
-            'subsubmenu',
-            'topbanner',
-            'gallery'
-        )
+        return view(
+            'frontend.index',
+            compact(
+                'news',
+                'notices',
+                'academics',
+                'testimonial',
+                'timeline',
+                'popup',
+                'banner',
+                'menu',
+                'submenu',
+                'subsubmenu',
+                'topbanner',
+                'gallery'
+            )
         );
 
     }
@@ -153,15 +156,15 @@ class HomeController extends Controller
         return view('frontend.about', compact('entries'));
     }
 
-    public function menubody($id)
+    public function subsubmenubody($id)
     {
 
-        $menubody = Menu::findOrFail($id);
-        if (filter_var($menubody->link, FILTER_VALIDATE_URL)) {
-            return redirect()->away($menubody->link);
+        $subsubmenubody = subsubmenu::findOrFail($id);
+        if (filter_var($subsubmenubody->link, FILTER_VALIDATE_URL)) {
+            return redirect()->away($subsubmenubody->link);
         } else {
 
-            return view('frontend.menubody', compact('menubody'));
+            return view('frontend.subsubmenubody', compact('subsubmenubody'));
         }
     }
 
@@ -177,6 +180,18 @@ class HomeController extends Controller
         }
     }
 
+    public function menubody($id)
+    {
+
+        $menubody = Menu::findOrFail($id);
+        if (filter_var($menubody->link, FILTER_VALIDATE_URL)) {
+            return redirect()->away($menubody->link);
+        } else {
+
+            return view('frontend.menubody', compact('menubody'));
+        }
+    }
+
     public function news()
     {
 
@@ -187,10 +202,14 @@ class HomeController extends Controller
 
     public function SSR()
     {
-        $ssr = SSR::where('status', 'published')->orderBy('created_at', 'desc')->get();
-        return view('frontend.ssrauth', compact('ssr'));
+        return view('frontend.ssrauth');
     }
 
+    public function SSRPage()
+    {
+        $ssr = SSR::where('status', 'published')->orderBy('created_at', 'desc')->get();
+        return view('frontend.ssr',compact('ssr'));
+    }
     public function verify(Request $request)
     {
         $ssr = SSR::where('status', 'published')->orderBy('created_at', 'desc')->get();
@@ -199,17 +218,16 @@ class HomeController extends Controller
 
         if ($request->password === $correctPassword) {
 
-            return view('frontend.ssr', compact('ssr'));
+            return redirect(route('ssr.page',compact('ssr')));
 
         } else {
 
             if ($request->password !== $correctPassword) {
-              Toastr::error('Wrong Password!');
+                toastr::error('!Wrong Password');
+                return redirect(route('ssr'));
             }
-            return view('frontend.ssrauth');
-          }
+        }
     }
-
     public function newsdetails($id)
     {
 
@@ -223,9 +241,8 @@ class HomeController extends Controller
         return [
             'topbanner' => Topbanner::where('status', 'published')->orderByDesc('created_at')->take(1)->get(),
             'menu' => Menu::where('status', 'published')->orderByDesc('created_at')->get(),
-            'submenu' => Submenu::where('status', 'published')->orderByDesc('created_at')->get(),
-
-            'subsubmenu' => subsubmenu::where('status', 'published')->orderByDesc('created_at')->get(),
+            'submenu' => Submenu::orderByDesc('created_at')->get(),
+            'subsubmenu' => subsubmenu::orderByDesc('created_at')->get(),
         ];
     }
 

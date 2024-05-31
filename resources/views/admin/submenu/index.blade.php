@@ -24,12 +24,11 @@
                                             <th>Author</th>
                                             <th>Menu</th>
                                             <th>Submenu</th>
-                                            <th>Status</th>
-
+                                            <!-- <th>Status</th> -->
                                             <th>Date</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
-                                            <th>Publish</th>
+                                            <!-- <th>Publish</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -39,7 +38,7 @@
                                         <td>{{$ban->author}}</td>
                                         <td>{{$ban->menu->title}}</td>
                                         <td>{{$ban->title1}}</td>
-                                        <td>{{$ban->status}}</td>
+                                        <!-- <td>{{$ban->status}}</td> -->
 
                                         <td>{{date('Y-m-d', strtotime($ban->created_at))}}</td>
                                         <td><a class="btn btn-primary" href="{{route('submenu.edit', $ban->id)}}" >Edit</a></td>
@@ -51,12 +50,12 @@
                                          <button class="btn btn-danger  confirm-delete" >Delete</button>
                                          </form>
                                         </td>
-                                        <td>
+                                        <!-- <td>
     <form action="{{ route('submenu.publish', $ban->id) }}" method="post">
         @csrf
         <button type="submit" class="btn btn-success confirm-publish"  data-id="{{$ban->id}}" >Publish</a>
     </form>
-</td>
+</td> -->
                                     </tr>
                     @endforeach
 

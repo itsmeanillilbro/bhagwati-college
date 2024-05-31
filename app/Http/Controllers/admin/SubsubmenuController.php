@@ -41,7 +41,7 @@ class SubsubmenuController extends Controller
       $submenu = Submenu::find($data['submenu_id']);
         $data['submenutitle'] = $submenu->title1;
         $subsubmenu = new subsubmenu();
-        $subsubmenu->status='draft';
+        // $subsubmenu->status='published';
         if ($subsubmenu->create($data)) {
             Toastr::success('Insertion Successfull!!');
             return redirect()->route('subsubmenu.index');

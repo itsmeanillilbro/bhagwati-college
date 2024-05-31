@@ -34,13 +34,13 @@ y
                                 <input type="text" name="subsubmenutitle" class="form-control" value="{{$subsubmenu->subsubmenutitle}}">
                             </div>
 
-                            <div class="input-group" style="margin-bottom: 13px;">
+                            <!-- <div class="input-group" style="margin-bottom: 13px;">
                                 <label for="banner_status">Status</label>
                                 <select name="status" class="form-control">
                                 <option value="draft" {{$subsubmenu->status==='draft'? 'selected':''}}>Draft</option>
                             <option value="published" {{$subsubmenu->status==='published'?'selected':''}}>Publish</option>
                                 </select>
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
                                 <label for="banner_img">Submenu URL</label>

@@ -1,5 +1,4 @@
 @extends ('admin.layouts.adminheader')
-@extends ('admin.layouts.adminfooter')
 @if ($errors->any())
     <script>
         @foreach ($errors->all() as $error)

@@ -20,8 +20,8 @@
             <div class="col-md-12 mb-3">
               <div class="input-group1 text-center">
                 Password:
-                <input type="password" id="user_password" placeholder="Enter Password" name="password" aria-describedby="inputGroupPrepend" required>
-                <button class="mybtn btn" type="submit">Submit</button>
+                <input class="mb-2" type="password" id="user_password" placeholder="Enter Password" name="password" aria-describedby="inputGroupPrepend" required>
+                <button class="mybtn btn " type="submit">Submit</button>
               </div>
             </div>
           </div>

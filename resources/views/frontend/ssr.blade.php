@@ -14,26 +14,14 @@
             <h3 class="pt-2">ALL FILES</h3>
         </center>
         <br>
-        <table class="table table-bordered ">
+        @foreach($ssr as $sr)
+            <div class="mx-3 my-3" style="font-size:1.6rem;" >
+                <!-- <td><a class='down-title' href="{{ route('ssr.download', ['filename' => $sr->file]) }}">{{ $sr->file }}</a></td> -->
+                {{$loop->iteration}}. <a class="text-primary"
+                    href="{{asset("storage/images/file/" . $sr->file)}}">{{$sr->title}}</a><br>
+            </div>
+        @endforeach
 
-            <thead class="bg-download">
-                <tr>
-                    <th class="serial-no" scope="col">SN</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Downloads</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    @foreach($ssr as $sr)
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$sr->title}}</td>
-                        <td><a class='down-title' href="{{ route('ssr.download', ['filename' => $sr->file]) }}">{{ $sr->file }}</a></td>
-                    @endforeach
-                </tr>
-            </tbody>
-        </table>
     </div>
 </section>
 

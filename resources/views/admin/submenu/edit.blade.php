@@ -33,7 +33,7 @@
                             <label for="banner_title">Submenu</label>
                             <input type="text" name="title1" class="form-control" value="{{$submenu->title1}}">
                         </div>
-
+<!--
                         <div class="input-group" style="margin-bottom: 13px;">
                             <label for="banner_status">Status</label>
                             <select name="status" class="form-control">
@@ -41,7 +41,7 @@
                                 <option value="published" {{$submenu->status === 'published' ? 'selected' : ''}}>Publish
                                 </option>
                             </select>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label for="banner_img">Submenu URL</label>
