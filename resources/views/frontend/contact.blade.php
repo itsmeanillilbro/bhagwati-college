@@ -35,8 +35,8 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="contact-info">
-                            <h3 class="pb-5" >Get in Touch</h3>
+                        <div class="contact-info text-center">
+                            <h3 class="pb-3 text-center" >Get in Touch</h3>
                             <h4><i class="fa fa-map-marker"></i>Kamalamai Municipality, Sindhuli, Nepal</h4>
                             <h4><i class="fa fa-envelope"></i>bhagawati.hses@gmail.com</h4>
                             <h4><i class="fa fa-phone"></i>9854020179</h4>

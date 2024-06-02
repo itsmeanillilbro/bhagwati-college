@@ -26,18 +26,21 @@
     background-position: center;
     min-height: 300px;
     margin-bottom: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
-
-
 
 .all-title-box h1 {
     color: #fff;
     font-weight: 600;
     text-transform: capitalize;
-    padding-top: 11%;
     font-size: 48px;
-    line-height: 0px;
+    line-height: 1;
+
 }
+
 
 span.m_1 {
     font-weight: 300;
@@ -726,6 +729,8 @@ span.m_1 {
     margin: 10px;
 }
 
+
+
 .card-page img {
     width: 100%;
     height: 48vh;
@@ -801,10 +806,18 @@ span.m_1 {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    width: 95%;
 }
 
 .news-card:hover {
     transform: translateY(-5px);
+}
+
+@media(max-width:768px){
+    .news-card{
+        width: 90%;
+        margin: auto;
+    }
 }
 
 .ne-img img {
@@ -851,6 +864,26 @@ span.m_1 {
     padding: 10px;
 }
 
+@media (max-width: 1200px) {
+    .card-page {
+        flex: 1 0 30%; /* Adjust the percentage to control the number of cards per row */
+    }
+}
+
+@media (max-width: 992px) {
+    .card-page {
+        flex: 1 0 45%; /* Adjust the percentage to control the number of cards per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .card-page {
+
+        flex: 1 0 100%; /* Adjust the percentage to control the number of cards per row */
+    }
+
+}
+
 /* Testimonial Section */
 .client {
     width: 100%;
@@ -858,7 +891,50 @@ span.m_1 {
     background: -webkit-linear-gradient(to right, #007f7f, #00bfbf);
     background: linear-gradient(to right, #007f7f, #00bfbf);
 }
+/* Responsive font sizes for the h1 element */
+h1.display-3 {
+    font-size: 2.5rem; /* Default size */
+}
 
+@media (max-width: 1200px) {
+    h1.display-3 {
+        font-size: 2.25rem;
+    }
+}
+
+@media (max-width: 992px) {
+    h1.display-3 {
+        font-size: 1.75rem;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 768px) {
+    h1.display-3 {
+        font-size: 1.75rem;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 576px) {
+    h1.display-3 {
+        font-size: 1.75rem;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 400px) {
+    h1.display-3 {
+        font-size: 1.75rem;
+        font-weight: 600;
+    }
+}
+
+
+h1.display-3 {
+    margin: 0.5rem 0;
+    padding: 0;
+}
 .carousel-icon i {
     font-size: 5rem;
     color: rgba(255, 255, 255, 0.3);

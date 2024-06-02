@@ -20,12 +20,12 @@
         </div>
     </div> -->
 
-    <div class="top-news">
-    <div class="row">
+    <div class="top-news"  >
+    <div class="row" >
         <div class="col-md-12 tn-left" >
-            <div class="row tn-slider ">
+            <div class="row tn-slider">
                 @foreach($banner as $ban)
-                    <div class="col-md-12" >
+                    <div class="col-md-12"  >
                         <div class="tn-img" >
                             <img src="{{asset('storage/images/banner/' .$ban->image)}}"  />
                             <div class="tn-title">

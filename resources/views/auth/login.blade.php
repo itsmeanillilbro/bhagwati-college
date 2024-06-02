@@ -20,7 +20,7 @@
 
                 <div class="row">
                     <div class="col-md-12 mb-3" >
-                        <label for="user_name">Username:</label>
+                        <label for="user_name">Email:</label>
                         <div class="input-group  input-group1">
                             <input type="text" class="form-control" id="user_name" placeholder="Enter Username" name="email" aria-describedby="inputGroupPrepend" required>
 

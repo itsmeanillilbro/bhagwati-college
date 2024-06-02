@@ -60,82 +60,73 @@
 
 
     <nav>
-        <div class="navbar">
-            <i class='bx bx-menu'></i>
-            <div class="logo"> <a href="{{route('index')}}">
-                    <img src="{{url("frontend/img/translogo1.png")}}" height="70px" width="80px"
-                        style="background-color:	#F5F5F5;">
-                </a></div>
-            <div class="nav-links">
-                <div class="sidebar-logo">
-                    <a href="{{route('index')}}">
-                        <img src="{{url("frontend/img/logo.png")}}" height="70px" width="80px">
-                    </a>
-                    <i class='bx bx-x'></i>
-                </div>
-                <ul class="links ">
-                    <li> <a href="{{route("index")}}">Home</a></li>
+    <div class="navbar">
+        <i class='bx bx-menu menu-toggle'></i>
+        <div class="logo"> <a href="{{route('index')}}">
+                <img src="{{url("frontend/img/translogo1.png")}}" height="70px" width="80px" style="background-color:	#F5F5F5;">
+            </a></div>
+        <div class="nav-links">
+            <div class="sidebar-logo">
+                <a href="{{route('index')}}">
+                    <img src="{{url("frontend/img/logo.png")}}" height="70px" width="80px">
+                </a>
+                <i class='bx bx-x'></i>
+            </div>
+            <ul class="links main-menu">
+                <li> <a href="{{route("index")}}">Home</a></li>
 
-                    @foreach($menu as $men)
-                        @if($men->status === 'published')
-                            <li>
-                                @if(isset($men->submenus) && count($men->submenus) > 0)
-                                    <a href="#">{{ $men->title }}</a>
-                                    <i class='bx bxs-chevron-down htmlcss-arrow arrow submenu-toggle'></i>
-                                @else
-                                    <a href="{{ route('menu.body', $men->id) }}">{{ $men->title }}</a>
-                                @endif
-                                @if(isset($men->submenus) && count($men->submenus) > 0)
-                                    <ul class="htmlCss-sub-menu sub-menu submenu-toggle">
-                                        @foreach($men->submenus as $submen)
-                                            <li
-                                                class="{{ isset($submen->subsubmenus) && count($submen->subsubmenus) > 0 ? 'more' : '' }}">
-                                                @if(!isset($submen->subsubmenus) || count($submen->subsubmenus) == 0 || $submen->status === 'published')
-                                                    <a href="{{ route('submenu.body', $submen->id) }}">{{ $submen->title1 }}</a>
-                                                @else
-                                                    <a href="#">{{ $submen->title1 }}</a>
-                                                    @if(isset($submen->subsubmenus) && count($submen->subsubmenus) > 0)
-                                                        <i class='bx bxs-chevron-right arrow more-arrow sub-submenu-toggle'></i>
-                                                    @endif
-                                                @endif
+                <!-- Add your dynamic menu items here -->
+                @foreach($menu as $men)
+                    @if($men->status === 'published')
+                        <li>
+                            @if(isset($men->submenus) && count($men->submenus) > 0)
+                                <a href="#">{{ $men->title }}</a>
+                                <i class='bx bxs-chevron-down htmlcss-arrow arrow'></i>
+                            @else
+                                <a href="{{ route('menu.body', $men->id) }}">{{ $men->title }}</a>
+                            @endif
+                            @if(isset($men->submenus) && count($men->submenus) > 0)
+                                <ul class="htmlCss-sub-menu sub-menu">
+                                    @foreach($men->submenus as $submen)
+                                        <li class="{{ isset($submen->subsubmenus) && count($submen->subsubmenus) > 0 ? 'more' : '' }}">
+                                            @if(!isset($submen->subsubmenus) || count($submen->subsubmenus) == 0)
+                                                <a href="{{ route('submenu.body', $submen->id) }}">{{ $submen->title1 }}</a>
+                                            @else
+                                                <a href="#">{{ $submen->title1 }}</a>
                                                 @if(isset($submen->subsubmenus) && count($submen->subsubmenus) > 0)
-                                                    <ul class="more-sub-menu sub-menu">
-                                                        @foreach($submen->subsubmenus as $subsubmen)
-                                                            <li>
-                                                                <a
-                                                                    href="{{ route('subsubmenu.body', $subsubmen->id) }}">{{ $subsubmen->subsubmenutitle }}</a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
+                                                    <i class='bx bxs-chevron-right arrow more-arrow'></i>
                                                 @endif
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </li>
-                        @endif
-                    @endforeach
-
-
-
-
-                    <li> <a href="{{route("about")}}">About</a></li>
-                    <li> <a href="{{route("ssr")}}">SSR</a></li>
-                    <li> <a href="{{route("news")}}">News</a></li>
-                    <li> <a href="{{route("academics")}}">Academics</a></li>
-                    <li> <a href="{{route("gallery")}}">Gallery</a></li>
-                    <li> <a href="{{route("notice")}}">Notice</a></li>
-                    <li> <a href="{{route("contact")}}">Contact</a></li>
-                </ul>
-            </div>
-            <div class="search-box">
-                <i class='bx bx-search'></i>
-                <div class="input-box">
-                    <input type="text" placeholder="Search...">
-                </div>
-            </div>
+                                            @endif
+                                            @if(isset($submen->subsubmenus) && count($submen->subsubmenus) > 0)
+                                                <ul class="more-sub-menu sub-menu">
+                                                    @foreach($submen->subsubmenus as $subsubmen)
+                                                        <li>
+                                                            <a href="{{ route('subsubmenu.body', $subsubmen->id) }}">{{ $subsubmen->subsubmenutitle }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endif
+                @endforeach
+                <!-- End dynamic menu items -->
+                <li> <a href="{{route("about")}}">About</a></li>
+                <li> <a href="{{route("ssr")}}">SSR</a></li>
+                <li> <a href="{{route("news")}}">News</a></li>
+                <li> <a href="{{route("academics")}}">Academics</a></li>
+                <li> <a href="{{route("gallery")}}">Gallery</a></li>
+                <li> <a href="{{route("notice")}}">Notice</a></li>
+                <li> <a href="{{route("contact")}}">Contact</a></li>
+            </ul>
         </div>
-    </nav>
+
+    </div>
+</nav>
+
 
 
 
@@ -143,46 +134,73 @@
 
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Menu Toggle Button
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mainMenu = document.querySelector('.main-menu');
 
+    menuToggle.addEventListener('click', function() {
+        mainMenu.classList.toggle('show-menu');
+    });
 
-        // Sidebar open close js code
-        let navLinks = document.querySelector(".nav-links");
-        let menuOpenBtn = document.querySelector(".navbar .bx-menu");
-        let menuCloseBtn = document.querySelector(".nav-links .bx-x");
-        menuOpenBtn.onclick = function () {
-            navLinks.style.left = "0";
-        }
-        menuCloseBtn.onclick = function () {
-            navLinks.style.left = "-100%";
-        }
+    // Submenu Toggle Buttons
+    const submenuToggles = document.querySelectorAll('.htmlcss-arrow, .more-arrow');
 
-        // Sidebar submenu open close js code
-        let htmlcssArrows = document.querySelectorAll(".htmlcss-arrow");
-        htmlcssArrows.forEach((arrow) => {
-            arrow.onclick = function (event) {
-                event.preventDefault(); // Prevent default anchor behavior
-                this.parentElement.parentElement.classList.toggle("show1");
-            }
+    submenuToggles.forEach(function(submenuToggle) {
+        submenuToggle.addEventListener('click', function(event) {
+            // Prevent the default link behavior
+            event.preventDefault();
+            // Toggle the submenu display
+            const submenu = this.nextElementSibling;
+            submenu.classList.toggle('show-submenu');
         });
-
-        let moreArrows = document.querySelectorAll(".more-arrow");
-        moreArrows.forEach((arrow) => {
-            arrow.onclick = function (event) {
-                event.preventDefault(); // Prevent default anchor behavior
-                this.parentElement.parentElement.classList.toggle("show2");
-            }
-        });
+    });
+});
 
 
-        let jsArrow = document.querySelector(".js-arrow");
-jsArrow.onclick = function() {
- navLinks.classList.toggle("show3");
+// search-box open close js code
+let navbar = document.querySelector(".navbar");
+
+// sidebar open close js code
+let navLinks = document.querySelector(".nav-links");
+let menuOpenBtn = document.querySelector(".navbar .bx-menu");
+let menuCloseBtn = document.querySelector(".nav-links .bx-x");
+menuOpenBtn.onclick = function() {
+navLinks.style.left = "0";
+}
+menuCloseBtn.onclick = function() {
+navLinks.style.left = "-100%";
+}
+
+
+// sidebar submenu open close js code
+let htmlcssArrow = document.querySelector(".htmlcss-arrow");
+htmlcssArrow.onclick = function() {
+ navLinks.classList.toggle("show1");
+}
+let moreArrow = document.querySelector(".more-arrow");
+moreArrow.onclick = function() {
+ navLinks.classList.toggle("show2");
 }
 
     </script>
 
 
 <style>
+
+@media (max-width: 768px) {
+    .htmlCss-sub-menu {
+        display: none; /* Hide submenu by default on mobile */
+    }
+    .show-menu {
+        display: block !important; /* Show menu on mobile when toggled */
+    }
+    .show-submenu {
+        display: block !important; /* Show submenu on mobile when toggled */
+    }
+}
+
+
         /* Googlefont Poppins CDN Link */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
