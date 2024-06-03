@@ -18,7 +18,8 @@ class subsubmenu extends Model
         'link',
         'status',
         'author',
-        'description'
+        'description',
+        'password'
     ];
 
     public function submenu()

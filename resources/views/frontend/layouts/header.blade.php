@@ -115,7 +115,7 @@
                 @endforeach
                 <!-- End dynamic menu items -->
                 <li> <a href="{{route("about")}}">About</a></li>
-                <li> <a href="{{route("ssr")}}">SSR</a></li>
+                <li> <a href="{{route("auth")}}">SSR</a></li>
                 <li> <a href="{{route("news")}}">News</a></li>
                 <li> <a href="{{route("academics")}}">Academics</a></li>
                 <li> <a href="{{route("gallery")}}">Gallery</a></li>

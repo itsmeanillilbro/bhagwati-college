@@ -49,6 +49,14 @@ y
                             </div>
 
                             <div class="form-group">
+                    <label for="password">Password Protection?</label>
+                    <select id="password" name="password" class="form-control" required>
+                        <option value="no" {{ $subsubmenu->password === 'no' ? 'selected' : '' }}>No</option>
+                        <option value="yes" {{ $subsubmenu->password === 'yes' ? 'selected' : '' }}>Yes</option>
+                    </select>
+                </div>
+
+                            <div class="form-group">
                             <label for="submenu_para">Submenu Content</label>
                             <textarea class="form-control" name="description" id="" cols="30" rows="15">{{old('description',$subsubmenu->description)}}</textarea>
                         </div>

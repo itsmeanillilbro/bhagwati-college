@@ -85,13 +85,14 @@
 <div class="footer-bottom">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 copyright">
-                <p>Copyright &copy; <a href="">People'scampus</a>. All Rights Reserved</p>
+            <div class="col-md-12 copyright text-center">
+                <p>Copyright  &copy; <?php echo date('Y'); ?> BHAGAWATI ENGLISH SECONDARY SCHOOL | All rights reserved.</p>
+                <p>Made by <a href="">Anil Subedi</a> with ♡.</p>
             </div>
 
-            <div class="col-md-6 template-by">
+            <!-- <div class="col-md-6 template-by">
                 <p>Powered By <a href="https://erasoft.com.np/">Erasoft Solution Pvt. Ltd.</a></p>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

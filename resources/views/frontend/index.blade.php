@@ -225,7 +225,7 @@ $chunks = $news->take(6);
 
 
     <!-- TESTIMONIAL SECTION -->
-    <section class="client pt-3 pb-5">
+    <section class="client pt-3 pb-5"  >
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-12">
@@ -235,12 +235,12 @@ $chunks = $news->take(6);
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container" >
         <div class="row align-items-md-center text-white">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="col-lg-12 col-md-12 col-sm-12" >
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel"  >
 
-                    <div class="carousel-inner">
+                    <div class="carousel-inner" >
                         @foreach ($testimonial as $key => $test)
                         <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
                             <div class="row p-4">

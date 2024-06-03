@@ -24,6 +24,7 @@ use App\Models\Topbanner;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Zerkxubas\EsewaLaravel\Facades\Esewa;
 
@@ -160,6 +161,13 @@ class HomeController extends Controller
     {
 
         $subsubmenubody = subsubmenu::findOrFail($id);
+        if ($subsubmenubody->password === 'yes') {
+            $token = request()->query('auth_token');
+            if ($token !== session('auth_token')) {
+                session()->forget('auth_token');
+                return redirect()->route('auth');
+            }
+        }
         if (filter_var($subsubmenubody->link, FILTER_VALIDATE_URL)) {
             return redirect()->away($subsubmenubody->link);
         } else {
@@ -172,6 +180,13 @@ class HomeController extends Controller
     {
 
         $submenubody = Submenu::findOrFail($id);
+        if ($submenubody->password === 'yes') {
+            $token = request()->query('auth_token');
+            if ($token !== session('auth_token')) {
+                session()->forget('auth_token');
+                return redirect()->route('auth');
+            }
+        }
         if (filter_var($submenubody->link, FILTER_VALIDATE_URL)) {
             return redirect()->away($submenubody->link);
         } else {
@@ -182,15 +197,48 @@ class HomeController extends Controller
 
     public function menubody($id)
     {
-
         $menubody = Menu::findOrFail($id);
+        if ($menubody->password === 'yes') {
+            $token = request()->query('auth_token');
+            if ($token !== session('auth_token')) {
+                session()->forget('auth_token');
+                return redirect()->route('auth');
+            }
+        }
+
         if (filter_var($menubody->link, FILTER_VALIDATE_URL)) {
             return redirect()->away($menubody->link);
         } else {
-
             return view('frontend.menubody', compact('menubody'));
         }
     }
+
+    public function auth()
+    {
+        return view('frontend.ssrauth');
+    }
+
+    public function SSRPage()
+    {
+        $ssr = SSR::where('status', 'published')->orderBy('created_at', 'desc')->get();
+        return view('frontend.ssr', compact('ssr'));
+    }
+    public function verify(Request $request)
+    {
+        $correctPassword = 'yoo';
+
+        if ($request->password === $correctPassword) {
+            // Generate a random token for authentication
+            $token = Str::random(32);
+            session()->put('auth_token', $token);
+            // Redirect to the intended page after authentication
+            return redirect()->intended()->with('auth_token', $token);
+        } else {
+            toastr::error('Wrong Password');
+            return redirect(route('auth'));
+        }
+    }
+
 
     public function news()
     {
@@ -199,35 +247,6 @@ class HomeController extends Controller
         return view('frontend.news', compact('news'));
     }
 
-
-    public function SSR()
-    {
-        return view('frontend.ssrauth');
-    }
-
-    public function SSRPage()
-    {
-        $ssr = SSR::where('status', 'published')->orderBy('created_at', 'desc')->get();
-        return view('frontend.ssr',compact('ssr'));
-    }
-    public function verify(Request $request)
-    {
-        $ssr = SSR::where('status', 'published')->orderBy('created_at', 'desc')->get();
-        $correctPassword = 'yoo';
-
-
-        if ($request->password === $correctPassword) {
-
-            return redirect(route('ssr.page',compact('ssr')));
-
-        } else {
-
-            if ($request->password !== $correctPassword) {
-                toastr::error('!Wrong Password');
-                return redirect(route('ssr'));
-            }
-        }
-    }
     public function newsdetails($id)
     {
 

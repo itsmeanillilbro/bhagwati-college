@@ -32,6 +32,14 @@
                             class="form-control" >
                     </div>
                     <div class="form-group">
+                    <label for="password">Password Protection?</label>
+                    <select id="password" name="password" class="form-control" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                    <div class="form-group">
                             <label for="submenu_para">Sub-Submenu Content</label>
                             <textarea class="form-control" name="description" id="" cols="30" rows="15"></textarea>
                         </div>

@@ -12,9 +12,10 @@
         <div id="teachers" class="section wb">
             <div class="container">
                 <div class="row">
+                @foreach ($teams as  $team)
                     <div class="col-lg-3 col-md-6 col-12">
 
-                    @foreach ($teams as  $team)
+
 
                         <div class="our-team">
                             <div class="team-img">

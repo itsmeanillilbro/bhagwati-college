@@ -25,7 +25,7 @@
                         </div>
                         <!-- Content -->
                         <div class="box-content">
-                            <span class="post">{{$gal->title}}</span>
+                            <span class="post"> <a style="color:white;" href="{{ route('gallery.images', $gal->id) }}">{{$gal->title}}</a></span>
                         </div>
                     </div>
                 </div>

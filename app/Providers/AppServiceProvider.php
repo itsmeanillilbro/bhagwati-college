@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Providers;
+use App\Http\Middleware\CheckSSRPassword;
+use App\Http\Middleware\page_auth;
+use App\Http\Middleware\PageAuth;
 use App\Models\Menu;
 use App\Models\Submenu;
 use App\Models\subsubmenu;
@@ -8,6 +11,7 @@ use App\Models\Topbanner;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -43,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('admin-only', function (User $user) {
             return $user->isAdmin();
         });
-
+        Route::aliasMiddleware('page_auth', PageAuth::class);
     }
 
 

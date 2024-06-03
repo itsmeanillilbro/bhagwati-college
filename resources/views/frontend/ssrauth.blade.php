@@ -1,11 +1,11 @@
 
 @extends ('frontend.layouts.main')
 @section('main-container')
-  <div class="all-title-box">
+  <!-- <div class="all-title-box">
     <div class="container text-center">
       <h1>SSR<span class="m_1"><a href="{{ url('/') }}">Home</a> / <a href="{{ url('/SSR') }}">SSR</a></span></h1>
     </div>
-  </div>
+  </div> -->
   <section>
     <div class="container my-5">
       <div class="login-form justify-content-center">

@@ -206,9 +206,17 @@ Route::prefix('admin')->group(function(){
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('/menu/{id}', [HomeController::class,'menubody' ])->name('menu.body');
-Route::get('/submenu/{id}', [HomeController::class, 'submenubody'])->name('submenu.body');
-Route::get('/subsubmenu/{id}', [HomeController::class, 'subsubmenubody'])->name('subsubmenu.body');
+
+Route::middleware('page_auth')->group(function(){
+    Route::get('/menu/{id}', [HomeController::class,'menubody' ])->name('menu.body');
+    Route::get('/submenu/{id}', [HomeController::class, 'submenubody'])->name('submenu.body');
+    Route::get('/subsubmenu/{id}', [HomeController::class, 'subsubmenubody'])->name('subsubmenu.body');
+
+});
+
+
+Route::get('/menu/{id}', [HomeController::class,'menubody' ])->name('menu.body')->middleware('page_auth');
+
 Route::get('/download', [HomeController::class, 'download'])->name('download');
 Route::get('/file_download/{filename}', function ($filename) {
     $path = storage_path('app/public/images/file/' . $filename);
@@ -246,9 +254,10 @@ Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/newsdetails/{id}', [HomeController::class, 'newsdetails'])->name('news_details');
 // Route::get('/academicdetails', [HomeController::class, 'academicdetails'])->name('academicdetails');
 Route::get('/teams', [HomeController::class, 'teams'])->name('teams');
-Route::get('/ssr', [HomeController::class, 'SSR'])->name('ssr');
+
+Route::get('/auth', [HomeController::class, 'auth'])->name('auth');
 Route::post('/verify', [HomeController::class, 'verify'])->name('verify');
-Route::get('/ssrpage', [HomeController::class, 'SSRPage'])->name('ssr.page');
+Route::get('/ssrpage', [HomeController::class, 'SSRPage'])->name('ssr.page')->middleware('page_auth');
 
 Route::get('/ssr_download/{filename}', function ($filename) {
     $path = storage_path('app/public/images/file/' . $filename);
