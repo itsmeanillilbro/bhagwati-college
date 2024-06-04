@@ -23,6 +23,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\PopupController;
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\PageAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\TestimonialController;
@@ -207,15 +208,13 @@ Route::prefix('admin')->group(function(){
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::middleware('page_auth')->group(function(){
-    Route::get('/menu/{id}', [HomeController::class,'menubody' ])->name('menu.body');
-    Route::get('/submenu/{id}', [HomeController::class, 'submenubody'])->name('submenu.body');
-    Route::get('/subsubmenu/{id}', [HomeController::class, 'subsubmenubody'])->name('subsubmenu.body');
+    Route::middleware([PageAuth::class])->group(function(){
+        Route::get('/menu/{id}', [HomeController::class,'menubody' ])->name('menu.body');
+        Route::get('/submenu/{id}', [HomeController::class, 'submenubody'])->name('submenu.body');
+        Route::get('/subsubmenu/{id}', [HomeController::class, 'subsubmenubody'])->name('subsubmenu.body');
 
-});
+    });
 
-
-Route::get('/menu/{id}', [HomeController::class,'menubody' ])->name('menu.body')->middleware('page_auth');
 
 Route::get('/download', [HomeController::class, 'download'])->name('download');
 Route::get('/file_download/{filename}', function ($filename) {
@@ -257,7 +256,7 @@ Route::get('/teams', [HomeController::class, 'teams'])->name('teams');
 
 Route::get('/auth', [HomeController::class, 'auth'])->name('auth');
 Route::post('/verify', [HomeController::class, 'verify'])->name('verify');
-Route::get('/ssrpage', [HomeController::class, 'SSRPage'])->name('ssr.page')->middleware('page_auth');
+Route::get('/ssrpage', [HomeController::class, 'SSRPage'])->name('ssr.page')->middleware('auth_token');
 
 Route::get('/ssr_download/{filename}', function ($filename) {
     $path = storage_path('app/public/images/file/' . $filename);

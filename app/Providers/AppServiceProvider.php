@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('admin-only', function (User $user) {
             return $user->isAdmin();
         });
-        Route::aliasMiddleware('page_auth', PageAuth::class);
+        Route::aliasMiddleware('auth_token', PageAuth::class);
     }
 
 

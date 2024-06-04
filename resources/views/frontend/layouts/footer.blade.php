@@ -48,9 +48,9 @@
 
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
-                    <h3 class="title">About Campus</h3>
+                    <h3 class="title  ">About Campus</h3>
                     <div class="newsletter">
-                        <p>
+                        <p  >
                             People’s Campus (PEC), a pioneering and a leading community-based non-profit academic
                             institution, was established in 1981 A.D. with the initiation of a group of visionary
                             educationists, professionals and key stakeholders in the field of education.</p>
@@ -164,6 +164,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 {!! Toastr::message() !!}
+
+
 
 </body>
 

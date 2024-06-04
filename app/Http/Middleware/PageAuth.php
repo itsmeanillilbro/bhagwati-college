@@ -18,16 +18,16 @@ class PageAuth
         $menu = Menu::find($id);
         $submenu = Submenu::find($id);
         $subsubmenu = Subsubmenu::find($id);
+
         if (
             ($menu && $menu->password === 'yes') ||
             ($submenu && $submenu->password === 'yes') ||
             ($subsubmenu && $subsubmenu->password === 'yes')
         ) {
-            // Check if the authentication token is present and valid
-            if (!Session::has('auth_token') || $request->query('auth_token') !== session('auth_token')) {
-                // If not, redirect to the authentication page
-                session()->forget('auth_token');
-                session()->put('url.intended', $request->fullUrl());
+
+
+            session()->put('auth_intended_url', $request->fullUrl());
+            if (!Session::has('authenticated')) {
                 return redirect()->route('auth');
             }
         }

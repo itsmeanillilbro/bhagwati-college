@@ -115,7 +115,7 @@
                 @endforeach
                 <!-- End dynamic menu items -->
                 <li> <a href="{{route("about")}}">About</a></li>
-                <li> <a href="{{route("auth")}}">SSR</a></li>
+
                 <li> <a href="{{route("news")}}">News</a></li>
                 <li> <a href="{{route("academics")}}">Academics</a></li>
                 <li> <a href="{{route("gallery")}}">Gallery</a></li>
@@ -128,14 +128,8 @@
 </nav>
 
 
-
-
-
-
-
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-    // Menu Toggle Button
     const menuToggle = document.querySelector('.menu-toggle');
     const mainMenu = document.querySelector('.main-menu');
 
@@ -143,14 +137,10 @@
         mainMenu.classList.toggle('show-menu');
     });
 
-    // Submenu Toggle Buttons
     const submenuToggles = document.querySelectorAll('.htmlcss-arrow, .more-arrow');
-
     submenuToggles.forEach(function(submenuToggle) {
         submenuToggle.addEventListener('click', function(event) {
-            // Prevent the default link behavior
             event.preventDefault();
-            // Toggle the submenu display
             const submenu = this.nextElementSibling;
             submenu.classList.toggle('show-submenu');
         });
@@ -170,17 +160,6 @@ navLinks.style.left = "0";
 }
 menuCloseBtn.onclick = function() {
 navLinks.style.left = "-100%";
-}
-
-
-// sidebar submenu open close js code
-let htmlcssArrow = document.querySelector(".htmlcss-arrow");
-htmlcssArrow.onclick = function() {
- navLinks.classList.toggle("show1");
-}
-let moreArrow = document.querySelector(".more-arrow");
-moreArrow.onclick = function() {
- navLinks.classList.toggle("show2");
 }
 
     </script>

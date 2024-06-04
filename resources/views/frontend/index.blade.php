@@ -225,7 +225,7 @@ $chunks = $news->take(6);
 
 
     <!-- TESTIMONIAL SECTION -->
-    <section class="client pt-3 pb-5"  >
+    <section class="client pt-3 pb-5" >
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-12">
@@ -246,7 +246,7 @@ $chunks = $news->take(6);
                             <div class="row p-4">
                                 <div class="t-card">
                                     <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                    <p class="lh-lg"  style="max-width: 600px; margin: 0 auto;">{!!$test->description!!}</p>
+                                    <p class="lh-lg" >{!!$test->description!!}</p>
                                     <i class="fa fa-quote-right" aria-hidden="true"></i><br>
                                 </div>
                                 <div class="row align-items-center">
@@ -264,7 +264,7 @@ $chunks = $news->take(6);
                         </div>
                         @endforeach
                     </div>
-                    <div class="controls text-center">
+                    <div class="controls text-center" >
                         <a class="left-arrow" href="#carouselExampleCaptions" data-bs-slide="prev"><i
                                 class="fa fa-chevron-left" aria-hidden="true"></i></a>
                         <a class="right-arrow" href="#carouselExampleCaptions" data-bs-slide="next"><i

@@ -850,6 +850,18 @@ span.m_1 {
         font-size: 18px;
     }
 }
+/* @media screen and (max-width: 768px) {
+    .card-page  img{
+        width: 90%;
+        margin: auto;
+
+    }
+    .content-page{
+        width: 90%;
+        margin: auto;
+    }
+} */
+
 
 /* news section */
 

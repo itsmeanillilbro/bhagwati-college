@@ -24,6 +24,7 @@ use App\Models\Topbanner;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Zerkxubas\EsewaLaravel\Facades\Esewa;
@@ -157,50 +158,14 @@ class HomeController extends Controller
         return view('frontend.about', compact('entries'));
     }
 
-    public function subsubmenubody($id)
-    {
-
-        $subsubmenubody = subsubmenu::findOrFail($id);
-        if ($subsubmenubody->password === 'yes') {
-            $token = request()->query('auth_token');
-            if ($token !== session('auth_token')) {
-                session()->forget('auth_token');
-                return redirect()->route('auth');
-            }
-        }
-        if (filter_var($subsubmenubody->link, FILTER_VALIDATE_URL)) {
-            return redirect()->away($subsubmenubody->link);
-        } else {
-
-            return view('frontend.subsubmenubody', compact('subsubmenubody'));
-        }
-    }
-
-    public function submenubody($id)
-    {
-
-        $submenubody = Submenu::findOrFail($id);
-        if ($submenubody->password === 'yes') {
-            $token = request()->query('auth_token');
-            if ($token !== session('auth_token')) {
-                session()->forget('auth_token');
-                return redirect()->route('auth');
-            }
-        }
-        if (filter_var($submenubody->link, FILTER_VALIDATE_URL)) {
-            return redirect()->away($submenubody->link);
-        } else {
-
-            return view('frontend.submenubody', compact('submenubody'));
-        }
-    }
-
     public function menubody($id)
     {
         $menubody = Menu::findOrFail($id);
         if ($menubody->password === 'yes') {
             $token = request()->query('auth_token');
-            if ($token !== session('auth_token')) {
+            $sessionToken = session('auth_token');
+            if ($token !== $sessionToken) {
+
                 session()->forget('auth_token');
                 return redirect()->route('auth');
             }
@@ -213,32 +178,64 @@ class HomeController extends Controller
         }
     }
 
-    public function auth()
+    public function submenubody($id)
     {
-        return view('frontend.ssrauth');
+        $submenubody = Submenu::findOrFail($id);
+        if ($submenubody->password === 'yes') {
+            $token = request()->query('auth_token');
+            $sessionToken = session('auth_token');
+            if ($token !== $sessionToken) {
+
+                session()->forget('auth_token');
+                return redirect()->route('auth');
+            }
+        }
+        if (filter_var($submenubody->link, FILTER_VALIDATE_URL)) {
+            return redirect()->away($submenubody->link);
+        } else {
+            return view('frontend.submenubody', compact('submenubody'));
+        }
     }
 
-    public function SSRPage()
+    public function subsubmenubody($id)
     {
-        $ssr = SSR::where('status', 'published')->orderBy('created_at', 'desc')->get();
-        return view('frontend.ssr', compact('ssr'));
+        $subsubmenubody = Subsubmenu::findOrFail($id);
+        if ($subsubmenubody->password === 'yes') {
+            $token = request()->query('auth_token');
+            $sessionToken = session('auth_token');
+            if ($token !== $sessionToken) {
+
+                session()->forget('auth_token');
+                return redirect()->route('auth');
+            }
+        }
+        if (filter_var($subsubmenubody->link, FILTER_VALIDATE_URL)) {
+            return redirect()->away($subsubmenubody->link);
+        } else {
+            return view('frontend.subsubmenubody', compact('subsubmenubody'));
+        }
     }
+
     public function verify(Request $request)
     {
         $correctPassword = 'yoo';
 
         if ($request->password === $correctPassword) {
-            // Generate a random token for authentication
-            $token = Str::random(32);
-            session()->put('auth_token', $token);
-            // Redirect to the intended page after authentication
-            return redirect()->intended()->with('auth_token', $token);
+            session()->put('authenticated', true);
+            $intendedUrl = session()->get('auth_intended_url', url('/'));
+            session()->forget('auth_intended_url');
+            return redirect($intendedUrl);
         } else {
-            toastr::error('Wrong Password');
-            return redirect(route('auth'));
+            Toastr::error("Wrong Password");
+            return redirect()->route('auth');
         }
     }
 
+
+    public function auth()
+    {
+        return view('frontend.ssrauth');
+    }
 
     public function news()
     {

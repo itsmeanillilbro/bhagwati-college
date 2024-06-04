@@ -1101,6 +1101,12 @@ margin: auto;
     width: 100%;
 }
 
+@media(max-width:678px){
+    .footer .newsletter p{
+        text-align: justify;
+    }
+}
+
 .footer .newsletter form {
     position: relative;
     width: 100%;
